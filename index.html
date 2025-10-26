@@ -47,14 +47,5 @@
 						document.Testing.volumen_final.value = ans.toFixed(3);
 				}
 		</script>
-<script>
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('service-worker.js')
-      .then(() => console.log('✅ Service Worker registrado'))
-      .catch(err => console.error('❌ Error Service Worker:', err));
-  });
-}
-</script>
 </body>
 </html>
