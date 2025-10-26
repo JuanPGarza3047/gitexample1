@@ -132,15 +132,6 @@ function addval() {
   resultado.innerText = `Volumen: ${vol.toFixed(3)} pulgadas³`;
   resultado.style.display = "block";
 }
-
-// Register Service Worker
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('service-worker.js')
-      .then(() => console.log('✅ Service Worker registrado'))
-      .catch(err => console.error('❌ Error Service Worker:', err));
-  });
-}
 </script>
 
 </body>
