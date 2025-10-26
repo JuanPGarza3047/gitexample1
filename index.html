@@ -1,51 +1,147 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<title>Calculadora de Volumen</title>
-	</head>
-	<style>
-	div {
-	background-color: lightblue;
-	width: 300px;
-	border: 2px solid black;
-	padding: 50px;
-	margin:20px;
-	
-	}
-	</style>
-	<h2>
-		<br>
-		Calculadora de Volumen
-		<br/>
-	</h2>
-	Esta aplicasion calcula el volumen de rodillos.
-	<ul><li>Interior: Diametro interior del rodillo en pulagadas.
-	</li><li>Exterior: Diametro exterior del rodillo en pulagadas.
-	</li><li>Largo: Largo del rodillo en pulgadas<br><br>
-	<body>
-		<div><form name = "Testing">
-			Interior: <input type = "Number" step = 0.01 name = "d1"><br>
-			Exterior: <input type = "Number" step = 0.01 name = "d2"><br>
-			Largo: <input type = "Number" step = 0.01 name = "a"><br>
-			Volumen: <input type = "Number" step = 0.01 name = "volumen_final" disabled><br>
-			<input type = "button" value = "Calculate" onClick = "addval()">
-		</form></div>
-		<script type = "text/javascript">
-				function addval()
-				{
-						var d_1, no2, no3, no4, ans, vol1, vol2, vol;
-						dd_1 = Number(document.Testing.d1.value);
-						d_1 = dd_1  * dd_1 
-						d_2 = Number(document.Testing.d2.value);
-						d_2 = (d_2 + 0.5) * (d_2 + 0.5)
-						a_1 = Number(document.Testing.a.value);
-						vol1 = 3.14 * d_1 * a_1
-						a_1 = a_1 + 1
-						vol2 = d_2 - d_1
-						vol = (vol2*0.017) * a_1
-						ans = vol;
-						document.Testing.volumen_final.value = ans.toFixed(3);
-				}
-		</script>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de Volumen</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#007bff">
+<style>
+  /* Reset some default styles */
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #e0f7fa, #ffffff);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .container {
+    background: #fff;
+    padding: 30px 25px;
+    border-radius: 15px;
+    max-width: 400px;
+    width: 100%;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  }
+
+  h2 {
+    text-align: center;
+    color: #007bff;
+    margin-bottom: 20px;
+  }
+
+  p {
+    text-align: center;
+    color: #555;
+    margin-bottom: 25px;
+  }
+
+  label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #333;
+  }
+
+  input[type="number"] {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    transition: border 0.2s;
+  }
+
+  input[type="number"]:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+
+  button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 25px;
+    border: none;
+    border-radius: 12px;
+    background: #007bff;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  button:hover {
+    background: #0056b3;
+  }
+
+  #resultado {
+    margin-top: 30px;
+    padding: 20px;
+    background: #e3f2fd;
+    border-radius: 12px;
+    font-weight: bold;
+    text-align: center;
+    display: none;
+    color: #007bff;
+    font-size: 18px;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h2>⚙️ Calculadora de Volumen</h2>
+  <p>Calcula el volumen de rodillos en pulgadas.</p>
+
+  <form name="Testing">
+    <label>Diámetro interior (pulgadas)</label>
+    <input type="number" step="0.01" name="d1" placeholder="Ej. 10.5">
+
+    <label>Diámetro exterior (pulgadas)</label>
+    <input type="number" step="0.01" name="d2" placeholder="Ej. 12.0">
+
+    <label>Largo del rodillo (pulgadas)</label>
+    <input type="number" step="0.01" name="a" placeholder="Ej. 50.0">
+
+    <button type="button" onclick="addval()">Calcular</button>
+  </form>
+
+  <div id="resultado"></div>
+</div>
+
+<script>
+function addval() {
+  const d1 = Number(document.Testing.d1.value);
+  const d2 = Number(document.Testing.d2.value);
+  const a = Number(document.Testing.a.value);
+
+  // Fórmula del volumen ajustada
+  const d1_sq = d1 * d1;
+  const d2_sq = (d2 + 0.5) * (d2 + 0.5);
+  const vol2 = d2_sq - d1_sq;
+  const vol = (vol2 * 0.017) * (a + 1);
+
+  const resultado = document.getElementById("resultado");
+  resultado.innerText = `Volumen: ${vol.toFixed(3)} pulgadas³`;
+  resultado.style.display = "block";
+}
+
+// Register Service Worker
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('service-worker.js')
+      .then(() => console.log('✅ Service Worker registrado'))
+      .catch(err => console.error('❌ Error Service Worker:', err));
+  });
+}
+</script>
+
 </body>
 </html>
